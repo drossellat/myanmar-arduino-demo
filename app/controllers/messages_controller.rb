@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
 	
 	def latest
 			@messages = Message.last
-			render text: @messages.message	
+			render text: "<#{@messages.message	}>"
 	end
 
 	def create
