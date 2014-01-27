@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
 	
 	def latest
 			@messages = Message.last
-			render json: @messages	
+			render text: @messages.message	
 	end
 
 	def create
