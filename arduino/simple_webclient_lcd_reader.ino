@@ -4,7 +4,7 @@
 #include <HttpClient.h>
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-
+HttpClient client;
 
 //const int ledPin = 13; // the pin that the LED is attached to
 //int incomingByte;      // a variable to read incoming serial data into
@@ -29,6 +29,7 @@ void setup() {
 void loop() {
   while (true) {
     String pageValue = readPage(); //connect to the server and read the output
+    Console.println("output:"+ pageValue);
     lcd.clear();
     lcd.print(pageValue); //print out the findings.
   
@@ -39,8 +40,7 @@ void loop() {
 
 String readPage(){
   //read the page, and capture & return everything between '<' and '>'
-  HttpClient client;
-  client.get("http://192.168.22.102:3000/messages/latest");
+  client.get("http://10.0.10.39:3000/messages/latest");
   stringPos = 0;
   memset( &inString, 0, 32 ); //clear inString memory
 
@@ -61,7 +61,7 @@ String readPage(){
           startRead = false;
           //client.stop();
           client.flush();
-          lcd.print("disconnecting.");
+          //Console.println("disconnecting.");
           return inString;
 
         }
